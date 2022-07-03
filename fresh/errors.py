@@ -13,7 +13,7 @@ class Error:
 
     def as_string(self):
         result = f'{self.error_name}: {self.details}'
-        result += f'\nFile {self.pos_start.filename}, line {self.pos_start.line + 1}:{self.pos_start.index + 1}'
+        result += f'\nFile {self.pos_start.filename}, line {self.pos_start.line + 1}:{self.pos_start.column + 1}'
         result += '\nError occurred here:\n' + string_with_arrows(self.pos_start.filetext, self.pos_start, self.pos_end)
         return result
 
@@ -44,7 +44,7 @@ class RTError(Error):
         pos = self.pos_start
         context = self.context
         while context:
-            result = f'    File {pos.filename}, line {pos.line + 1}:{pos.index + 1}, in {context.display_name}'
+            result = f'    File {pos.filename}, line {pos.line + 1}:{pos.column + 1}, in {context.display_name}'
             pos = context.parent_entry_position
             context = context.parent
         return 'Traceback (most recent call last):\n' + result

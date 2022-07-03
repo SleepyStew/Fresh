@@ -10,7 +10,7 @@ set adjective = str_input('Choose an adjective: ')
 
 set noun3 = str_input('Choose a noun: ')
 
-log("------------------------------------------")
+log("------------------------------------------")append
 log("Be kind to your " + noun + " - footed " + p_noun)
 log("For a duck may be somebody's " + noun2 + ",")
 log("Be kind to your " + p_noun + " in " + place)
