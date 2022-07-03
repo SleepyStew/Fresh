@@ -211,24 +211,33 @@ class Interpreter:
 
     def visit_CallNode(self, node, context):
         response = RuntimeResult()
-        arguments = []
+        try:
+            arguments = []
 
-        value_to_call = response.register(self.visit(node.function_node, context))
-        if response.should_return():
-            return response
-        value_to_call = value_to_call.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
-
-        for argument_node in node.argument_nodes:
-            argument = response.register(self.visit(argument_node, context))
+            value_to_call = response.register(self.visit(node.function_node, context))
             if response.should_return():
                 return response
-            arguments.append(argument)
+            value_to_call = value_to_call.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
 
-        return_value = response.register(value_to_call.execute(arguments))
-        if response.should_return():
-            return response
-        return_value = return_value.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
-        return response.success(return_value)
+            for argument_node in node.argument_nodes:
+                argument = response.register(self.visit(argument_node, context))
+                if response.should_return():
+                    return response
+                arguments.append(argument)
+
+            return_value = response.register(value_to_call.execute(arguments))
+            if response.should_return():
+                return response
+            return_value = return_value.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
+            return response.success(return_value)
+        except RecursionError:
+            value_to_call = response.register(self.visit(node.function_node, context))
+            return response.failure(RTError(
+                value_to_call.pos_start,
+                value_to_call.pos_end,
+                'Max recursion depth exceeded',
+                context
+            ))
 
     def visit_StringNode(self, node, context):
         return RuntimeResult().success(String(node.token.value).set_pos(node.pos_start, node.pos_end).set_context(context))

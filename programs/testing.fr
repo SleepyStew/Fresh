@@ -1,13 +1,8 @@
-func f1()
-    log(1 / 0)
+func test()
+    func test1()
+        log("hello")
+    end
+    test1()
 end
 
-func f2()
-    f1()
-end
-
-func f3()
-    f2()
-end
-
-f3()
+test()
