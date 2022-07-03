@@ -1,0 +1,19 @@
+log("Number Guessing Game")
+set random_number = random_int(1, 100)
+set guess = 0
+
+while guess != random_number then
+    set guess = str_input("Guess a number between 1 and 100: ")
+    while not is_digit(guess) then
+        log("Please input a number!")
+        set guess = str_input("Guess a number between 1 and 100: ")
+    end
+    set guess = int(guess)
+    if guess < random_number then
+        log("Too low")
+    elif guess > random_number then
+        log("Too high")
+    else
+        log("You got it!")
+    end
+end

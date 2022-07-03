@@ -1,0 +1,12 @@
+set test = "123"
+set test_ = test
+set test_ = test_ + "1"
+log(test)
+log(test_)
+
+
+set test = [1, 2, 3]
+set test_ = test
+append(test_, 1)
+log(test)
+log(test_)

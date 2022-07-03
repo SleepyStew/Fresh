@@ -1,0 +1,27 @@
+set list = []
+
+// Make random list
+for i = 0 to 20 then
+    append(list, random_int(1, 100))
+end
+
+func sort(list)
+    set list_ = list
+    set new_list = []
+    while len(list_) > 0 then
+        set minimum = 0
+        for i = 0 to len(list_) then
+            if (list_ ? i) < list_ ? minimum then
+                set minimum = i
+            end
+        end
+        append(new_list, list_ ? minimum)
+        pop(list_, minimum)
+    end
+    return new_list
+end
+
+set new_list = sort(list)
+
+log(list)
+log(new_list)

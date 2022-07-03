@@ -1,0 +1,21 @@
+set noun = str_input('Choose a noun: ')
+
+set p_noun = str_input('Choose a plural noun: ')
+
+set noun2 = str_input('Choose a noun: ')
+
+set place = str_input('Choose a place: ')
+
+set adjective = str_input('Choose an adjective: ')
+
+set noun3 = str_input('Choose a noun: ')
+
+log("------------------------------------------")
+log("Be kind to your " + noun + " - footed " + p_noun)
+log("For a duck may be somebody's " + noun2 + ",")
+log("Be kind to your " + p_noun + " in " + place)
+log("Where the weather is always" + adjective + ".")
+log("")
+log("You may think that is this the " + noun3 + ",")
+log("Well it is.")
+log("------------------------------------------")
