@@ -79,7 +79,7 @@ class Interpreter:
 
         if error:
             return response.failure(error)
-        return response.success(result.set_pos(node.pos_start, node.pos_end))
+        return response.success(result.set_pos(node.pos_start, node.pos_end).set_context(context))
 
     def visit_UnaryOpNode(self, node, context):
         response = RuntimeResult()
@@ -97,7 +97,7 @@ class Interpreter:
         if error:
             return response.failure(error)
         else:
-            return response.success(number.set_pos(node.pos_start, node.pos_end))
+            return response.success(number.set_pos(node.pos_start, node.pos_end).set_context(context))
 
     def visit_IfNode(self, node, context):
         response = RuntimeResult()
@@ -216,7 +216,7 @@ class Interpreter:
         value_to_call = response.register(self.visit(node.function_node, context))
         if response.should_return():
             return response
-        value_to_call = value_to_call.copy().set_pos(node.pos_start, node.pos_end)
+        value_to_call = value_to_call.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
 
         for argument_node in node.argument_nodes:
             argument = response.register(self.visit(argument_node, context))

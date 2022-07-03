@@ -1,12 +1,13 @@
-set test = "123"
-set test_ = test
-set test_ = test_ + "1"
-log(test)
-log(test_)
+func f1()
+    log(1 / 0)
+end
 
+func f2()
+    f1()
+end
 
-set test = [1, 2, 3]
-set test_ = test
-append(test_, 1)
-log(test)
-log(test_)
+func f3()
+    f2()
+end
+
+f3()

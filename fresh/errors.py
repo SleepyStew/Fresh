@@ -43,11 +43,14 @@ class RTError(Error):
         result = ''
         pos = self.pos_start
         context = self.context
+        contexts = []
         while context:
-            result = f'    File {pos.filename}, line {pos.line + 1}:{pos.column + 1}, in {context.display_name}'
+            contexts.append(f'\n    File {pos.filename}, line {pos.line + 1}:{pos.column + 1}, in {context.display_name}')
             pos = context.parent_entry_position
             context = context.parent
-        return 'Traceback (most recent call last):\n' + result
+        contexts.reverse()
+        result += ''.join(contexts)
+        return 'Traceback (most recent call last):' + result
 
 
 class ExpectedCharError(Error):
