@@ -1,8 +1,4 @@
-func test()
-    func test1()
-        log("hello")
-    end
-    test1()
-end
+set list = [1, 2, 3]
+list ? 1 = 10
 
-test()
+log(list)

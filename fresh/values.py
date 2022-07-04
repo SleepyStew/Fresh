@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 from fresh.context import Context
 from fresh.errors import RTError as RTError
@@ -571,6 +572,19 @@ class BuiltInFunction(BaseFunction):
 
     execute_is_digit.arg_names = ['value']
 
+    def execute_wait(self, execute_context):
+        time_ = execute_context.symbol_table.get('time')
+        if not isinstance(time_, Number):
+            return RuntimeResult().failure(RTError(
+                self.pos_start, self.pos_end,
+                "Argument must be a number",
+                self.context
+            ))
+        time.sleep(time_.value)
+        return RuntimeResult().success(Number.null)
+
+    execute_wait.arg_names = ['time']
+
 
     def no_visit_method(self, node, context):
         raise Exception(f"No execute_{self.name} method defined")
@@ -596,6 +610,7 @@ BuiltInFunction.str = BuiltInFunction("str")
 BuiltInFunction.int = BuiltInFunction("int")
 BuiltInFunction.float = BuiltInFunction("float")
 BuiltInFunction.is_digit = BuiltInFunction("is_digit")
+BuiltInFunction.wait = BuiltInFunction("wait")
 
 class List(Value):
     def __init__(self, elements):

@@ -1,8 +1,9 @@
-log("Number Guessing Game")
+clear()
 set random_number = random_int(1, 100)
 set guess = 0
 
 while guess != random_number then
+    log("Number Guessing Game")
     set guess = str_input("Guess a number between 1 and 100: ")
     while not is_digit(guess) then
         log("Please input a number!")
@@ -11,8 +12,12 @@ while guess != random_number then
     set guess = int(guess)
     if guess < random_number then
         log("Too low")
+        wait(1)
+        clear()
     elif guess > random_number then
         log("Too high")
+        wait(1)
+        clear()
     else
         log("You got it!")
     end

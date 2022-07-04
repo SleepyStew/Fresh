@@ -52,6 +52,7 @@ ERROR_KEYWORDS = [
     "while",
     "for",
     "log",
+    "wait",
     "str_input",
     "num_input",
     "is_digit",

@@ -27,6 +27,7 @@ global_symbol_table.set('random_int', BuiltInFunction.random_int)
 global_symbol_table.set('str', BuiltInFunction.str)
 global_symbol_table.set('int', BuiltInFunction.int)
 global_symbol_table.set('float', BuiltInFunction.float)
+global_symbol_table.set('wait', BuiltInFunction.wait)
 
 def run(filename, text, debug=False):
     lexer = Lexer(filename, text, debug)
